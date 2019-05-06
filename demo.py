@@ -23,6 +23,13 @@ if __name__ == '__main__':
         Image.fromarray(image_framed).save(output_file)
         print("Mission complete, it took {:.3f}s".format(time.time() - t))
         print("\nRecognition Result:\n")
+
+        results_arr = []
         for key in result:
-            print(result[key][1])
+            results_arr.append(u"{}  -  {}\n".format(key, result[key][1]).encode("UTF-8"))
+
+        with open(os.path.join(result_dir, image_file.split('/')[-1])
+                          .replace(".jpg", ".txt"), 'wb') as f:
+            f.writelines(results_arr)
+
 
